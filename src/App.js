@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Button } from 'reactstrap';
+import PouchDB from 'pouchdb';
 import Sidebar from './components/Sidebar/index';
 import GetRSSFeedData from './components/List/GetRSSFeedData';
 import logo from './logo.svg';
