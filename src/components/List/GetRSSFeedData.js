@@ -5,10 +5,9 @@ export default async term => {
       .then((response) => {
         return response.text()
       }).then((xml) => {
-        console.log(xml)
         let xmlParse = new DOMParser();
         console.log(xmlParse.parseFromString(xml, 'text/xml'));
-        return xml
+        return xmlParse.parseFromString(xml, 'text/xml')
       }).catch( (error) => {
         console.log(error)
       }) 

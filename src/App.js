@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
-import { Button } from 'reactstrap';
+import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
 import PouchDB from 'pouchdb';
 import Sidebar from './components/Sidebar/index';
 import GetRSSFeedData from './components/List/GetRSSFeedData';
-import logo from './logo.svg';
+import FeedList from './components/Display/index';
 import './App.css';
 
 class App extends Component {
@@ -21,23 +21,24 @@ class App extends Component {
   fetchXML = async term => {
     const feed = await GetRSSFeedData(term);
     this.setState({ xmlData: feed});
-  }
+  };
 
   render() {
     return (
-      <div className="container">
-        <div className="row">
-          <div className="col-md-2">
-            <ul>
-              <Sidebar></Sidebar>
-            </ul>
-          </div>
-          <div className="col-md-10">
-            body
+      <Router>
+        <div className="container">
+          <div className="row">
+            <div className="col-md-2">
+              <ul>
+                <Sidebar></Sidebar>
+              </ul>
+            </div>
+            <div className="col-md-10">
+              <FeedList feed={this.state.xmlData}></FeedList>
+            </div>
           </div>
         </div>
-      </div>
-
+      </Router>
     );
   }
 }
