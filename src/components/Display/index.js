@@ -15,7 +15,7 @@ export default class FeedList extends Component {
   render() {
     let feedContainer = [];
     let feedList = [];
-    if (this.props.feed !== null) {
+    if (this.props.feed) {
       let feedData = this.props.feed.getElementsByTagName('entry');
       feedList = Object.values(feedData);
 

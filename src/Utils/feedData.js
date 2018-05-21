@@ -1,7 +1,6 @@
-const feedData = [
-    {
-        'vinit' : { name: 'Vinit Kumar', feedUrl: 'https://vinitkumar.me/feed.xml' }
-    }
-];
-
-export default feedData;
+export default function feedData() {
+    return [
+        { title: 'Vinit Kumar', feedURL: 'https://vinitkumar.me/feed.xml' },
+        { title: 'James Long', feedURL: 'https://jlongster.com/atom.xml'},
+    ];
+}
