@@ -1,10 +1,9 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
-import Sidebar from './components/Sidebar/index';
-import GetRSSFeedData from './components/List/GetRSSFeedData';
-import FeedList from './components/Display/index';
-import feedData from './Utils/feedData';
+import { FeedList, Sidebar } from './components';
 import { AddFeed, DeleteFeed, EditFeed, AllFeed } from './FeedCrud/index';
+import feedData from './Utils/feedData';
+import GetRSSFeedData from './Utils/GetRSSFeedData';
 import './App.css';
 
 class App extends Component {
