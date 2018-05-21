@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
-import PouchDB from 'pouchdb';
 import Sidebar from './components/Sidebar/index';
 import GetRSSFeedData from './components/List/GetRSSFeedData';
 import FeedList from './components/Display/index';
+import { AddFeed, DeleteFeed, EditFeed, AllFeed} from './FeedCrud/index';
 import './App.css';
 
 class App extends Component {
@@ -16,6 +16,8 @@ class App extends Component {
 
   componentDidMount() {
     this.fetchXML();
+    AddFeed({'title': 'Vinit', 'description': 'One good boy'});
+    AllFeed();
   }
 
   fetchXML = async term => {
