@@ -5,8 +5,23 @@ import feedData from "../../Utils/feedData";
 class Feed extends Component {
   render() {
     let node = this.props.node;
+    console.log(this.props.node.childNodes);
+    let dataObject = {};
+    this.props.node.childNodes.forEach((item) => {
+      if (item.nodeName !== 'content') {
+        dataObject[item.nodeName] = item.innerHTML;
+      } else {
+        dataObject[item.nodeName] = item.textContent;
+      }
+    });
+    let contentHTML = { __html: dataObject.content };
     return(
-      <div dangerouslySetInnerHTML={{__html: this.props.node.innerHTML }}></div>
+      <div>
+        <h1>{dataObject.title}</h1>
+        <p><strong>TLDR: </strong>{dataObject.summary}</p>
+        <a href={dataObject.id}><small>{dataObject.published}</small></a>
+        <div dangerouslySetInnerHTML={contentHTML}></div>
+      </div>
     );
   }
 }
