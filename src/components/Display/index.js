@@ -1,5 +1,6 @@
 import React, {Component, Fragment} from 'react';
 import feedData from "../../Utils/feedData";
+import { format, formatDistance, formatRelative, subDays } from 'date-fns'
 
 
 class Feed extends Component {
@@ -14,12 +15,15 @@ class Feed extends Component {
         dataObject[item.nodeName] = item.textContent;
       }
     });
+    dataObject["updated"] = format(new Date(dataObject["updated"]), 'ddd, DD/MMM/YY')
+    dataObject["published"] = format(new Date(dataObject["published"]), 'ddd, DD MMM YYYY')
+
     let contentHTML = { __html: dataObject.content };
     return(
       <div>
         <h1>{dataObject.title}</h1>
         <p><strong>TLDR: </strong>{dataObject.summary}</p>
-        <a href={dataObject.id}><small>{dataObject.published}</small></a>
+        <a href={dataObject.id} target='_blank'><small>{dataObject.published}</small></a>
         <div dangerouslySetInnerHTML={contentHTML}></div>
       </div>
     );
