@@ -1,12 +1,29 @@
 import React, {Component, Fragment} from 'react';
-import feedData from "../../Utils/feedData";
-import { format, formatDistance, formatRelative, subDays } from 'date-fns'
+import { format } from 'date-fns';
+
+export default class FeedList extends Component {
+  render() {
+    let feedContainer = [];
+    let feedList = [];
+    if (this.props.feed) {
+      let feedData = this.props.feed.getElementsByTagName('entry');
+      feedList = Object.values(feedData);
+
+      feedList.map((feed, key) => {
+        feedContainer.push(<Feed key={key} node={feed} />);
+      });
+    }
+    return(
+      <Fragment>
+        {feedContainer}
+      </Fragment>
+    );
+  }
+}
 
 
 class Feed extends Component {
   render() {
-    let node = this.props.node;
-    console.log(this.props.node.childNodes);
     let dataObject = {};
     this.props.node.childNodes.forEach((item) => {
       if (item.nodeName !== 'content') {
@@ -15,8 +32,8 @@ class Feed extends Component {
         dataObject[item.nodeName] = item.textContent;
       }
     });
-    dataObject["updated"] = format(new Date(dataObject["updated"]), 'ddd, DD/MMM/YY')
-    dataObject["published"] = format(new Date(dataObject["published"]), 'ddd, DD MMM YYYY')
+    dataObject['updated'] = format(new Date(dataObject['updated']), 'ddd, DD/MMM/YY');
+    dataObject['published'] = format(new Date(dataObject['published']), 'ddd, DD MMM YYYY');
 
     let contentHTML = { __html: dataObject.content };
     return(
@@ -29,24 +46,3 @@ class Feed extends Component {
     );
   }
 }
-
-export default class FeedList extends Component {
-  render() {
-    let feedContainer = [];
-    let feedList = [];
-    if (this.props.feed) {
-      let feedData = this.props.feed.getElementsByTagName('entry');
-      feedList = Object.values(feedData);
-
-      feedList.map((feed, key) => {
-        feedContainer.push(<Feed key={key} node={feed} />);
-      })
-    }
-    return(
-      <Fragment>
-        {feedContainer}
-      </Fragment>
-    );
-  }
-}
-
